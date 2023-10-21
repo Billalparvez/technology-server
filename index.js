@@ -35,18 +35,18 @@ async function run() {
             const result = await cursor.toArray()
             res.send(result)
         })
-        app.get('/technology/:id', async (req, res) => {
-            const id = req.params.id
-            const query = { _id: new ObjectId(id) }
-            const user = await technologyCollection.findOne(query)
-            res.send(user)
-        })
-        app.post('/technology', async (req, res) => {
-            const newProduct = req.body
-            console.log(newProduct)
-            const result = await technologyCollection.insertOne(newProduct)
-            res.send(result)
-        })
+        // app.get('/technology/:id', async (req, res) => {
+        //     const id = req.params.id
+        //     const query = { _id: new ObjectId(id) }
+        //     const user = await technologyCollection.findOne(query)
+        //     res.send(user)
+        // })
+        // app.post('/technology', async (req, res) => {
+        //     const newProduct = req.body
+        //     console.log(newProduct)
+        //     const result = await technologyCollection.insertOne(newProduct)
+        //     res.send(result)
+        // })
         app.put('/technology/:id', async (req, res) => {
             const id = req.params.id
             const updateData = req.body
