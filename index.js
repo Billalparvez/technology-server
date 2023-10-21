@@ -27,10 +27,11 @@ async function run() {
         const technologyCollection = client.db("technologyDB").collection("technology")
         const brandCollection = client.db("technologyDB").collection("brand")
         // Connect the client to the server	(optional starting in v4.7)
-        // await client.connect();
+        await client.connect();
 
-        app.get('/technology', async (req, res) => {
-            const cursor = technologyCollection.find()
+        app.get('/technology/brand/:brandName', async (req, res) => {
+           const brand=req.params.brandName
+            const cursor = technologyCollection.find({brand:brand})
             const result = await cursor.toArray()
             res.send(result)
         })
@@ -76,12 +77,6 @@ async function run() {
             const brand = req.body
             console.log(brand)
             const result = await brandCollection.insertOne(brand)
-            res.send(result)
-        })
-        app.delete('/brand/:id', async (req, res) => {
-            const id = req.params.id
-            const query = { _id: new ObjectId(id) }
-            const result = await brandCollection.deleteOne(query)
             res.send(result)
         })
         // Send a ping to confirm a successful connection
