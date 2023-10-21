@@ -27,7 +27,7 @@ async function run() {
         const technologyCollection = client.db("technologyDB").collection("technology")
         const brandCollection = client.db("technologyDB").collection("brand")
         // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
+        // await client.connect();
 
         app.get('/technology/brand/:brandName', async (req, res) => {
            const brand=req.params.brandName
