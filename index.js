@@ -30,8 +30,8 @@ async function run() {
         // await client.connect();
 
         app.get('/technology/brand/:brandName', async (req, res) => {
-           const brand=req.params.brandName
-            const cursor = technologyCollection.find({brand:brand})
+            const brand = req.params.brandName
+            const cursor = technologyCollection.find({ brand: brand })
             const result = await cursor.toArray()
             res.send(result)
         })
@@ -47,6 +47,7 @@ async function run() {
             const result = await technologyCollection.insertOne(newProduct)
             res.send(result)
         })
+
         app.put('/technology/:id', async (req, res) => {
             const id = req.params.id
             const updateData = req.body
@@ -73,6 +74,12 @@ async function run() {
             const result = await cursor.toArray()
             res.send(result)
         })
+        app.delete('/brand/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: new ObjectId(id) }
+            const result = await brandCollection.deleteOne(query)
+            res.send(result)
+        })
         app.post('/brand', async (req, res) => {
             const brand = req.body
             console.log(brand)
@@ -80,7 +87,7 @@ async function run() {
             res.send(result)
         })
         // Send a ping to confirm a successful connection
-        await client.db("admin").command({ ping: 1 });
+        // await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
         // Ensures that the client will close when you finish/error
